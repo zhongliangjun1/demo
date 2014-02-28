@@ -28,9 +28,10 @@ public class MyBean implements BeanNameAware, BeanFactoryAware, InitializingBean
         System.out.println("MyBean constructor");
     }
 
-    public MyBean(String myName) {
+    public MyBean(String myName, int age) {
         this.myName = myName;
-        System.out.println("MyBean constructor(String name)");
+        this.age = age;
+        System.out.println("MyBean constructor(String myName, int age) : myName="+myName+" age="+age);
     }
 
     /**
