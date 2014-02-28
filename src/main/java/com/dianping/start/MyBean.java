@@ -4,6 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,13 +13,15 @@ import org.springframework.beans.factory.BeanNameAware;
  * Time: PM8:49
  * To change this template use File | Settings | File Templates.
  */
-public class MyBean implements BeanNameAware, BeanFactoryAware {
+public class MyBean implements BeanNameAware, BeanFactoryAware, InitializingBean {
 
     private String myName;
     private int age;
     private String password;
     private String sex;
     private int bankSavings;
+
+    private String beanName;
 
 
     public MyBean() {
@@ -48,6 +51,7 @@ public class MyBean implements BeanNameAware, BeanFactoryAware {
 
     @Override
     public void setBeanName(String s) {
+        this.beanName = s;
         System.out.println("setBeanName : "+s);
     }
 
@@ -74,5 +78,10 @@ public class MyBean implements BeanNameAware, BeanFactoryAware {
     public void setBankSavings(int bankSavings) {
         this.bankSavings = bankSavings;
         System.out.println("setBankSavings : "+bankSavings);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("afterPropertiesSet() : have set all properties of "+this.beanName);
     }
 }
