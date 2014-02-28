@@ -20,8 +20,11 @@
         <property name="myName" value="dajun" />
         <property name="age" value="25" />
         <property name="password" value="${mybean.password}"/>
+        <property name="bankSavings" ref="myBankSavings"/>
         <property name="sex" value="#guess#"/>
     </bean>
+
+    <bean id="myBankSavings" class="com.dianping.start.ChildBeanFactory" factory-method="getBankSavings" lazy-init="true" />
 
     <bean id="myBeanFactoryPostProcessor" class="com.dianping.start.MyBeanFactoryPostProcessor" />
 	

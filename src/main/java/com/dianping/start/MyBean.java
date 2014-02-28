@@ -18,6 +18,7 @@ public class MyBean implements BeanNameAware, BeanFactoryAware {
     private int age;
     private String password;
     private String sex;
+    private int bankSavings;
 
 
     public MyBean() {
@@ -68,5 +69,10 @@ public class MyBean implements BeanNameAware, BeanFactoryAware {
     public void setSex(String sex) {
         this.sex = sex;
         System.out.println("setSex : "+sex);
+    }
+
+    public void setBankSavings(int bankSavings) {
+        this.bankSavings = bankSavings;
+        System.out.println("setBankSavings : "+bankSavings);
     }
 }
