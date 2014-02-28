@@ -13,6 +13,17 @@
 
 	<!-- 通过注解装配对象 -->
 	<!--<context:annotation-config />-->
+
+    <context:property-placeholder location="classpath*:config/conf.properties"/>
+
+    <bean id="myBean" class="com.dianping.start.MyBean" init-method="initMyself">
+        <property name="myName" value="dajun" />
+        <property name="age" value="25" />
+        <property name="password" value="${mybean.password}"/>
+        <property name="sex" value="#guess#"/>
+    </bean>
+
+    <bean id="myBeanFactoryPostProcessor" class="com.dianping.start.MyBeanFactoryPostProcessor" />
 	
 
 

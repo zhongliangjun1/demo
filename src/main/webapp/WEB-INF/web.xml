@@ -45,6 +45,7 @@
         <filter-class>com.dianping.start.TestFilter2</filter-class>
     </filter>
 
+    <!-- init按filter顺序，doFilter按filter-mapping顺序 -->
     <filter-mapping>
         <filter-name>TestFilter2</filter-name>
         <url-pattern>/*</url-pattern>
