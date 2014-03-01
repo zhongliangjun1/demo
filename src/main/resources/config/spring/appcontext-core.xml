@@ -28,7 +28,19 @@
     <bean id="myBankSavings" class="com.dianping.start.ChildBeanFactory" factory-method="getBankSavings" lazy-init="true" />
 
     <bean id="myBeanFactoryPostProcessor" class="com.dianping.start.MyBeanFactoryPostProcessor" />
-	
+
+
+
+
+
+    <!-- 循环依赖出现问题只发生在相互ref对方作为构造函数参数的时候 -->
+    <bean id="dependencyA" class="com.dianping.dependency.DependencyA">
+        <property name="dependencyB" ref="dependencyB"/>
+    </bean>
+    <bean id="dependencyB" class="com.dianping.dependency.DependencyB">
+        <property name="dependencyA" ref="dependencyA"/>
+    </bean>
+
 
 
 
