@@ -32,12 +32,15 @@
 
 
 
-
+    <!-- 依赖于dependencyB完全初始化完成 -->
+    <bean id="dependencyC" class="com.dianping.dependency.DependencyC" depends-on="dependencyB" init-method="initialize">
+        <property name="dependencyA" ref="dependencyA"/>
+    </bean>
     <!-- 循环依赖出现问题只发生在相互ref对方作为构造函数参数的时候 -->
-    <bean id="dependencyA" class="com.dianping.dependency.DependencyA">
+    <bean id="dependencyA" class="com.dianping.dependency.DependencyA" init-method="initialize">
         <property name="dependencyB" ref="dependencyB"/>
     </bean>
-    <bean id="dependencyB" class="com.dianping.dependency.DependencyB">
+    <bean id="dependencyB" class="com.dianping.dependency.DependencyB" init-method="initialize">
         <property name="dependencyA" ref="dependencyA"/>
     </bean>
 

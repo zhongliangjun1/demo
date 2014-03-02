@@ -15,6 +15,10 @@ public class DependencyA {
         System.out.println("DependencyA()");
     }
 
+    public void initialize(){
+        System.out.println("DependencyA initialized");
+    }
+
     public void setDependencyB(DependencyB dependencyB) {
         this.dependencyB = dependencyB;
     }
