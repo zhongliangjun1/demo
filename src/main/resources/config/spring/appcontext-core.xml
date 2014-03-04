@@ -9,7 +9,7 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
     <!-- 通过注解装配对象 -->
-	<!--<context:component-scan base-package="com.dianping" />-->
+	<context:component-scan base-package="com.dianping.annotation" />
 
 	<!-- 通过注解装配对象 -->
 	<!--<context:annotation-config />-->
