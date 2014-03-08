@@ -31,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
         return true;
     }
 
-    private void innerMethod(){
+    public void innerMethod(){
         System.out.println("execute innerMethod ");
         try {
             Thread.currentThread().sleep(2000);
