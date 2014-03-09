@@ -5,6 +5,7 @@ import com.dianping.aop.jdk.PerformanceHandler;
 import com.dianping.aop.jdk.ServiceWithPerformanceMonitorProxy;
 import com.dianping.aop.spring.MonitorAfterReturningAdvice;
 import com.dianping.aop.spring.MonitorBeforeAdvice;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.framework.ProxyFactory;
@@ -67,6 +68,7 @@ public class TestMain {
         proxyFactory.setTarget(target);
         proxyFactory.addAdvice(methodBeforeAdvice);
         proxyFactory.addAdvice(afterReturningAdvice);
+        System.out.println("proxyFactory.isInterfaceProxied of AdminService : " + proxyFactory.isInterfaceProxied(AdminService.class));
 
         AdminService proxy = (AdminService) proxyFactory.getProxy();
         int userId = 10;
@@ -77,11 +79,20 @@ public class TestMain {
 
 
     public static void main(String[] args) {
+        startLog4j();
         TestMain testMain = new TestMain();
         //testMain.jdkProxyEnhanceTest();
         //testMain.jdkProxyTest();
         //testMain.cglibProxyEnhanceTest();
         testMain.springAopTest();
+    }
+
+    /**
+     * 手动初始化log4j
+     */
+    private static void startLog4j(){
+        java.net.URL url = TestMain.class.getResource("/log/log4j.xml");
+        DOMConfigurator.configure(url);
     }
 
 
