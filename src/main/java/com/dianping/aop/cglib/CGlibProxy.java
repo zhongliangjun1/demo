@@ -30,12 +30,23 @@ public class CGlibProxy implements MethodInterceptor {
     }
 
 
+    /**
+     * 拦截父类所有方法的调用，通过代理类调用父类中的方法
+     * @param target
+     * @param method
+     * @param args
+     * @param methodProxy
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object intercept(Object target, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
 
         PerformanceMonitor.begin(method.getName());
 
         Object result = methodProxy.invokeSuper(target, args);
+        // 下面这样是无法执行原有方法的，因为这里的target并不是原有类的实例，而是代理类的实例
+        // target : com.dianping.aop.AdminServiceImpl$$EnhancerByCGLIB$$225da297@16dd5a9d
         //Object result = method.invoke(target, args);
 
         PerformanceMonitor.end(method.getName());
