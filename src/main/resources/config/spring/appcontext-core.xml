@@ -46,5 +46,14 @@
 
 
 
+    <!--<bean id="monitorBeforeAdvice" class="com.dianping.aop.spring.MonitorBeforeAdvice" />-->
+    <!--<bean id="monitorAfterReturningAdvice" class="com.dianping.aop.spring.MonitorAfterReturningAdvice" />-->
+    <!--<bean id="adminServiceTarget" class="com.dianping.aop.AdminServiceImpl" />-->
+    <!--<bean id="adminService" class="org.springframework.aop.framework.ProxyFactoryBean">-->
+
+    <!--</bean>-->
+
+
+
 
 </beans>

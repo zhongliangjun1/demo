@@ -65,9 +65,12 @@ public class TestMain {
         AfterReturningAdvice afterReturningAdvice = new MonitorAfterReturningAdvice();
 
         ProxyFactory proxyFactory = new ProxyFactory();
+        // setInterfaces后即为jdkDynamicAopProxy 否则为 Cglib2AopProxy
+        //proxyFactory.setInterfaces(target.getClass().getInterfaces());
         proxyFactory.setTarget(target);
         proxyFactory.addAdvice(methodBeforeAdvice);
         proxyFactory.addAdvice(afterReturningAdvice);
+
         System.out.println("proxyFactory.isInterfaceProxied of AdminService : " + proxyFactory.isInterfaceProxied(AdminService.class));
 
         AdminService proxy = (AdminService) proxyFactory.getProxy();
