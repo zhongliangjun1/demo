@@ -2,6 +2,7 @@ package com.dianping.aop;
 
 import com.dianping.aop.cglib.CGlibProxy;
 import com.dianping.aop.jdk.PerformanceHandler;
+import com.dianping.aop.jdk.ServiceWithPerformanceMonitorProxy;
 
 import java.lang.reflect.Proxy;
 
@@ -29,6 +30,16 @@ public class TestMain {
         proxy.removeTopic(userId);
     }
 
+    private void jdkProxyTest(){
+        AdminService target = new AdminServiceImpl();
+        AdminService proxy = (AdminService) ServiceWithPerformanceMonitorProxy.newProxyInstance(target);
+
+        int userId = 10;
+        String topic = "jdkProxyEnhanceTest";
+        proxy.addTopic(userId, topic);
+        proxy.removeTopic(userId);
+    }
+
 
     private void cglibProxyEnhanceTest(){
 
@@ -46,7 +57,8 @@ public class TestMain {
     public static void main(String[] args) {
         TestMain testMain = new TestMain();
         //testMain.jdkProxyEnhanceTest();
-        testMain.cglibProxyEnhanceTest();
+        testMain.jdkProxyTest();
+        //testMain.cglibProxyEnhanceTest();
     }
 
 
