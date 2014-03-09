@@ -5,6 +5,7 @@ import com.dianping.aop.jdk.PerformanceHandler;
 import com.dianping.aop.jdk.ServiceWithPerformanceMonitorProxy;
 import com.dianping.aop.spring.MonitorAfterReturningAdvice;
 import com.dianping.aop.spring.MonitorBeforeAdvice;
+import com.dianping.utils.ApplicationContextUtils;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
@@ -80,6 +81,25 @@ public class TestMain {
         proxy.removeTopic(userId);
     }
 
+    private void springAopWithConfigTest(){
+
+        ApplicationContextUtils.initialize();
+        int userId = 10;
+        String topic = "springAopWithConfigTest";
+
+        System.out.println("begin springAopWithConfigTest adminServiceOfJdkDynamic -----------------------");
+        AdminService adminServiceOfJdkDynamic = ApplicationContextUtils.getBean("adminServiceOfJdkDynamic");
+        adminServiceOfJdkDynamic.addTopic(userId, topic);
+        adminServiceOfJdkDynamic.removeTopic(userId);
+        System.out.println("end springAopWithConfigTest adminServiceOfJdkDynamic -----------------------");
+
+        System.out.println("begin springAopWithConfigTest adminServiceOfCglib -----------------------");
+        AdminService adminServiceOfCglib = ApplicationContextUtils.getBean("adminServiceOfCglib");
+        adminServiceOfCglib.addTopic(userId, topic);
+        adminServiceOfCglib.removeTopic(userId);
+        System.out.println("end springAopWithConfigTest adminServiceOfCglib -----------------------");
+    }
+
 
     public static void main(String[] args) {
         startLog4j();
@@ -87,7 +107,8 @@ public class TestMain {
         //testMain.jdkProxyEnhanceTest();
         //testMain.jdkProxyTest();
         //testMain.cglibProxyEnhanceTest();
-        testMain.springAopTest();
+        //testMain.springAopTest();
+        testMain.springAopWithConfigTest();
     }
 
     /**

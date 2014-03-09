@@ -46,12 +46,33 @@
 
 
 
-    <!--<bean id="monitorBeforeAdvice" class="com.dianping.aop.spring.MonitorBeforeAdvice" />-->
-    <!--<bean id="monitorAfterReturningAdvice" class="com.dianping.aop.spring.MonitorAfterReturningAdvice" />-->
-    <!--<bean id="adminServiceTarget" class="com.dianping.aop.AdminServiceImpl" />-->
-    <!--<bean id="adminService" class="org.springframework.aop.framework.ProxyFactoryBean">-->
 
-    <!--</bean>-->
+    <bean id="monitorBeforeAdvice" class="com.dianping.aop.spring.MonitorBeforeAdvice" />
+    <bean id="monitorAfterReturningAdvice" class="com.dianping.aop.spring.MonitorAfterReturningAdvice" />
+    <bean id="adminServiceTarget" class="com.dianping.aop.AdminServiceImpl" />
+
+    <bean id="adminServiceOfJdkDynamic" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- jdkDynamicAopProxy 指定代理的接口 -->
+        <property name="proxyInterfaces" value="com.dianping.aop.AdminService"></property>
+        <!-- 指定使用的增强 -->
+        <property name="interceptorNames" >
+            <list>
+                <idref local="monitorBeforeAdvice"></idref>
+                <idref local="monitorAfterReturningAdvice"></idref>
+            </list>
+        </property>
+        <!--<property name="interceptorNames" value="monitorBeforeAdvice,monitorAfterReturningAdvice" />-->
+        <!-- 指定对哪个bean进行代理 -->
+        <property name="target" ref="adminServiceTarget" />
+    </bean>
+    <bean id="adminServiceOfCglib" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!-- 指定使用的增强 -->
+        <property name="interceptorNames" value="monitorBeforeAdvice,monitorAfterReturningAdvice" />
+        <!-- 指定对哪个bean进行代理 -->
+        <property name="target" ref="adminServiceTarget" />
+        <!-- 使用cglib代理，无需再设置proxyInterfaces，即便设置也被忽略 -->
+        <property name="proxyTargetClass" value="true" />
+    </bean>
 
 
 
