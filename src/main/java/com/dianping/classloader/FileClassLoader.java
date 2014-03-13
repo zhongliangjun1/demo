@@ -85,6 +85,7 @@ public class FileClassLoader extends ClassLoader {
     public static void main(String[] args) throws Exception {
         FileClassLoader loader = new FileClassLoader("/Users/mac/Documents/mywork/dish/dish-beans/dish-api/target/classes");
         //loader.findClass("com.dianping.App");
+        loader.loadClass("com.dianping.classloader.FileClassLoader");
         loader.loadClass("com.dianping.dishremote.remote.MenuService");
     }
 
