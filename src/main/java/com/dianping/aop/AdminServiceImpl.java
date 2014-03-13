@@ -11,7 +11,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean addTopic(int userId, String topic) {
-        System.out.println("execute addTopic userId="+userId+" topic="+topic);
+        System.out.println("Admin execute addTopic userId="+userId+" topic="+topic);
         try {
             Thread.currentThread().sleep(2000);
         } catch (InterruptedException e) {
@@ -22,7 +22,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean removeTopic(int userId) {
-        System.out.println("execute removeTopic userId="+userId);
+        System.out.println("Admin execute removeTopic userId="+userId);
         try {
             Thread.currentThread().sleep(1000);
         } catch (InterruptedException e) {
@@ -32,7 +32,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     public void innerMethod(){
-        System.out.println("execute innerMethod ");
+        System.out.println("Admin execute innerMethod ");
         try {
             Thread.currentThread().sleep(2000);
         } catch (InterruptedException e) {

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+
+    <bean id="adminService" class="com.dianping.aop.AdminServiceImpl" />
+    <bean id="userService" class="com.dianping.aop.UserServiceImpl" />
+
+
+
+
+    <!-- aspectJ 驱动器 必须配置 -->
+    <aop:aspectj-autoproxy />
+
+    <!-- 增强 -->
+    <bean id="monitorBeforeAdvice" class="com.dianping.aop.spring.MonitorBeforeAdvice" />
+    <bean id="monitorAfterReturningAdvice" class="com.dianping.aop.spring.MonitorAfterReturningAdvice" />
+
+    <!-- 切点 -->
+    <bean id="monitorPointcut" class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
+        <!-- 匹配了所有拥有addTopic类的该方法 -->
+        <!--<property name="expression" value="execution(* com.dianping.aop.*.addTopic(..))" />-->
+        <!-- 匹配实现了AdminService接口的所有bean下的所有方法 -->
+        <property name="expression" value="execution(* com.dianping.aop.AdminService.*(..))" />
+    </bean>
+
+    <!-- 切面 -->
+    <bean id="monitorAdvisor1" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice" ref="monitorBeforeAdvice" />
+        <property name="pointcut" ref="monitorPointcut" />
+    </bean>
+    <bean id="monitorAdvisor2" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice" ref="monitorAfterReturningAdvice" />
+        <property name="pointcut" ref="monitorPointcut" />
+    </bean>
+
+</beans>

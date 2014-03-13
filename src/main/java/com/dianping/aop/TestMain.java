@@ -10,6 +10,8 @@ import org.apache.log4j.xml.DOMConfigurator;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.reflect.Proxy;
 
@@ -100,6 +102,24 @@ public class TestMain {
         System.out.println("end springAopWithConfigTest adminServiceOfCglib -----------------------");
     }
 
+    private void springAopWithAspectJConfig(){
+        String[] configLocations = {"classpath*:config/spring/aspectj-aop.xml"};
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(configLocations);
+
+        int userId = 10;
+        String topic = "springAopWithAspectJConfig";
+
+        AdminService adminService = (AdminService) applicationContext.getBean("adminService");
+        UserService userService = (UserService) applicationContext.getBean("userService");
+
+        System.out.println("-----------------------");
+        adminService.addTopic(userId, topic);
+        System.out.println("-----------------------");
+        userService.addTopic(userId, topic);
+        System.out.println("-----------------------");
+        adminService.removeTopic(userId);
+    }
+
 
     public static void main(String[] args) {
         startLog4j();
@@ -108,7 +128,8 @@ public class TestMain {
         //testMain.jdkProxyTest();
         //testMain.cglibProxyEnhanceTest();
         //testMain.springAopTest();
-        testMain.springAopWithConfigTest();
+        //testMain.springAopWithConfigTest();
+        testMain.springAopWithAspectJConfig();
     }
 
     /**
