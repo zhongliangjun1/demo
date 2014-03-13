@@ -30,4 +30,5 @@ public class Adao implements Dao, BeanNameAware {
     public String getBeanName() {
         return beanName;
     }
+    
 }
