@@ -9,8 +9,15 @@ package com.dianping.classloader;
  */
 public class Extend extends Base {
 
+    public static int i = getValue();
+
     static {
         System.out.println("execute static block of Extend");
+    }
+
+    private static int getValue(){
+        System.out.println("Extend.getValue()");
+        return 1;
     }
 
     public static void executeExtend(){

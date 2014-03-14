@@ -9,8 +9,15 @@ package com.dianping.classloader;
  */
 public class Base {
 
+    public static int i = getValue();
+
     static {
         System.out.println("execute static block of Base");
+    }
+
+    private static int getValue(){
+        System.out.println("Base.getValue()");
+        return 1;
     }
 
     public static void executeBase(){
