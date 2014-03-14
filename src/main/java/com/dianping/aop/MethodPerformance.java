@@ -20,7 +20,7 @@ public class MethodPerformance {
 
     public void printPerformance(){
         end = System.currentTimeMillis();
-        long elapse = end = begin;
+        long elapse = end - begin;
         System.out.println(method+" cost "+elapse);
     }
 
