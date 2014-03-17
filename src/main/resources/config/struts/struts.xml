@@ -13,7 +13,7 @@
 
     <include file="struts-default.xml" />
 
-    <package name="test" namespace="/" extends="struts-default">
+    <package name="test" namespace="/teststruts" extends="struts-default">
 
         <!-- action使用全类路径配置时，service注入是根据action属性名是否与spring容器中bean id 一致来决定的 -->
         <action name="action1" class="com.dianping.struts.ActionOfOriginStruts">

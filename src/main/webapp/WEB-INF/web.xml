@@ -72,7 +72,7 @@
 
     <filter-mapping>
         <filter-name>struts2</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/teststruts/*</url-pattern>
     </filter-mapping>
 
 
