@@ -8,10 +8,20 @@
     <constant name="struts.multipart.maxSize" value="20971520"/>
     <constant name="struts.devMode" value="true" />
 
+    <!--Spring插件是通过覆盖（override）Struts2的ObjectFactory来增强核心框架对象的创建的-->
+    <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+
     <include file="struts-default.xml" />
 
     <package name="test" namespace="/" extends="struts-default">
-        <action name="action1" class="com.dianping.struts.Action1">
+
+        <!-- action使用全类路径配置时，service注入是根据action属性名是否与spring容器中bean id 一致来决定的 -->
+        <action name="action1" class="com.dianping.struts.ActionOfOriginStruts">
+            <result name="success">/index.jsp</result>
+        </action>
+
+        <!-- 使用spring中bean来作为action时，依赖关系则完全按照spring的流程来，需要注入则需要配置或者添加注解 -->
+        <action name="action2" class="actionOfSpringBean" method="execute">
             <result name="success">/index.jsp</result>
         </action>
 

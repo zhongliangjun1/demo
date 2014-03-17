@@ -78,6 +78,9 @@
 
 
     <bean id="userService" class="com.dianping.aop.UserServiceImpl" />
+    <bean id="actionOfSpringBean" class="com.dianping.struts.ActionOfSpringBean" >
+        <property name="userService" ref="userService"/>
+    </bean>
 
 
 

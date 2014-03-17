@@ -10,7 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * Time: AM12:35
  * To change this template use File | Settings | File Templates.
  */
-public class Action1 extends ActionSupport {
+public class ActionOfOriginStruts extends ActionSupport {
 
     private static final long serialVersionUID = 232834287298017247L;
 
@@ -19,7 +19,7 @@ public class Action1 extends ActionSupport {
     @Override
     public String execute() throws Exception {
         try{
-            userService.addTopic(10, "Action1");
+            userService.addTopic(10, "ActionOfOriginStruts");
         }catch (Exception e){
             e.printStackTrace();
         }
