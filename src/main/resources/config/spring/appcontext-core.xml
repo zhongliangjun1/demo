@@ -77,5 +77,9 @@
 
 
 
+    <bean id="userService" class="com.dianping.aop.UserServiceImpl" />
+
+
+
 
 </beans>
