@@ -14,8 +14,9 @@ import org.springframework.stereotype.Repository;
 public class Bdao implements Dao, BeanNameAware {
 
     @Override
-    public void load() {
+    public String load() {
         System.out.println("Bdao execute load()");
+        return "success";
     }
 
     private String beanName;

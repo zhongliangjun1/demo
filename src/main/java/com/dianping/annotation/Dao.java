@@ -9,6 +9,6 @@ package com.dianping.annotation;
  */
 public interface Dao {
 
-    public void load();
+    public String load();
 
 }
