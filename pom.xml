@@ -60,6 +60,19 @@
           <version>2.3.1</version>
       </dependency>
 
+      <!-- xml parse -->
+      <dependency>
+          <groupId>org.codehaus.woodstox</groupId>
+          <artifactId>wstx-asl</artifactId>
+          <version>3.2.1</version>
+      </dependency>
+      <dependency>
+          <groupId>com.thoughtworks.xstream</groupId>
+          <artifactId>xstream</artifactId>
+          <version>1.4.2</version>
+      </dependency>
+
+
       <dependency>
           <groupId>com.google.guava</groupId>
           <artifactId>guava</artifactId>
@@ -94,6 +107,11 @@
           <artifactId>junit</artifactId>
           <version>4.10</version>
           <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <version>3.1.0.RELEASE</version>
       </dependency>
   </dependencies>
 
