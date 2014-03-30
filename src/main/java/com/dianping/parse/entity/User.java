@@ -28,4 +28,13 @@ public class User {
 
     public List<String> phoneNumbers;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", phoneNumbers=" + phoneNumbers +
+                '}';
+    }
 }

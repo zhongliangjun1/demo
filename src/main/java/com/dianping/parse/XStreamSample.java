@@ -3,9 +3,9 @@ package com.dianping.parse;
 import com.dianping.parse.entity.User;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,8 +44,31 @@ public class XStreamSample {
         xStream.toXML(user, outputStream);
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        objectToXml();
+    /**
+     * 流式处理
+     */
+    public static void objectToXmlWithStream() throws IOException {
+        User user = getUser();
+        PrintWriter printWriter = new PrintWriter("test2.xml");
+        PrettyPrintWriter writer = new PrettyPrintWriter(printWriter);
+        ObjectOutputStream outputStream = xStream.createObjectOutputStream(writer);
+        outputStream.writeObject(user);
+        outputStream.close();
+    }
+
+    public static void xmlToObjectWithStream() throws IOException, ClassNotFoundException {
+        FileReader reader = new FileReader("test2.xml");
+        BufferedReader bufferedReader = new BufferedReader(reader);
+
+        ObjectInputStream inputStream = xStream.createObjectInputStream(bufferedReader);
+        User user = (User) inputStream.readObject();
+        System.out.println(user.toString());
+    }
+
+    public static void main(String[] args) throws Exception {
+        //objectToXml();
+        //objectToXmlWithStream();
+        xmlToObjectWithStream();
     }
 
 
