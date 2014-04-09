@@ -5,6 +5,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,6 +28,17 @@ public class AppController {
         model.put("message", "hello "+name);
 
         return "hello";
+    }
+
+    @RequestMapping(value = "/ajax/shop/load", method = RequestMethod.GET)
+    public @ResponseBody Shop loadShop(){
+
+        Shop shop = new Shop();
+        shop.setShopId(11);
+        shop.setShopName("云中小雅");
+        shop.setAddTime(new Date());
+
+        return shop;
     }
 
 

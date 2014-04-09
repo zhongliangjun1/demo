@@ -10,6 +10,20 @@
   <name>spring-demo</name>
   <url>http://maven.apache.org</url>
 
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>local private nexus</name>
+            <url>http://maven.oschina.net/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
@@ -92,6 +106,13 @@
           <groupId>org.apache.struts</groupId>
           <artifactId>struts2-spring-plugin</artifactId>
           <version>${struts.version}</version>
+      </dependency>
+
+      <!-- Jackson JSON Mapper -->
+      <dependency>
+          <groupId>org.codehaus.jackson</groupId>
+          <artifactId>jackson-mapper-asl</artifactId>
+          <version>1.9.10</version>
       </dependency>
 
 
