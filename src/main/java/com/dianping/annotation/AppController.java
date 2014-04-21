@@ -34,12 +34,12 @@ public class AppController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ModelAndView register(User user){
+    public ModelAndView register(User user, @RequestParam(value = "name") String name){
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("hello");
         modelAndView.addObject("isOk", true);
-        modelAndView.addObject("message", "hello " + user.getName());
+        modelAndView.addObject("message", "hello " + user.getName() + name);
 
         return modelAndView;
     }
