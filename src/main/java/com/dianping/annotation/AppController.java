@@ -2,10 +2,8 @@ package com.dianping.annotation;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 
@@ -21,8 +19,13 @@ import java.util.Date;
 //@RequestMapping("/spring-mvc")
 public class AppController {
 
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(){
+        return "index";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String hello(@RequestParam(value = "name", required = false, defaultValue = "soso") String name,  ModelMap model){
+    public String login(@RequestParam(value = "name", required = false, defaultValue = "soso") String name,  ModelMap model){
 
         model.put("isOk", true);
         model.put("message", "hello "+name);
@@ -30,11 +33,22 @@ public class AppController {
         return "hello";
     }
 
-    @RequestMapping(value = "/ajax/shop/load", method = RequestMethod.GET)
-    public @ResponseBody Shop loadShop(){
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView register(User user){
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("hello");
+        modelAndView.addObject("isOk", true);
+        modelAndView.addObject("message", "hello " + user.getName());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/ajax/shop/{shopId}", method = RequestMethod.GET)
+    public @ResponseBody Shop loadShop(@PathVariable("shopId") int shopId){
 
         Shop shop = new Shop();
-        shop.setShopId(11);
+        shop.setShopId(shopId);
         shop.setShopName("云中小雅");
         shop.setAddTime(new Date());
 
