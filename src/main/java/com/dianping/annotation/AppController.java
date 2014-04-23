@@ -1,13 +1,33 @@
 package com.dianping.annotation;
 
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import static org.apache.commons.io.IOUtils.toByteArray;
 
 /**
  * Created with IntelliJ IDEA.
@@ -71,6 +91,35 @@ public class AppController {
                                   @RequestParam(value = "name") String[] names, @RequestParam(value = "file") MultipartFile[] files) throws IOException {
 
         return "index";
+    }
+
+    @RequestMapping(value = "/getpic", method = RequestMethod.GET )
+    public void getpic(HttpServletResponse response) throws IOException {
+
+        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
+        ServletContext servletContext = webApplicationContext.getServletContext();
+
+        InputStream inputStream = servletContext.getResourceAsStream("/images/thumb3.jpg");
+
+//        InputStream inputStream = new FileInputStream("/Users/mac/Documents/mywork/spring-demo/src/main/webapp/images/thumb3.jpg");
+//        final HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_JPEG);
+//        List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+//        acceptableMediaTypes.add(MediaType.IMAGE_PNG);
+//        acceptableMediaTypes.add(MediaType.IMAGE_JPEG);
+//        headers.setAccept(acceptableMediaTypes);
+//        return new ResponseEntity<byte[]>(IOUtils.toByteArray(inputStream), headers, HttpStatus.CREATED);
+
+        //return ImageIO.read(inputStream);
+
+        //Resource resource = new ClassPathResource("/images/thumb3.jpg");
+        //byte[] fileDate = FileCopyUtils.copyToByteArray(resource.getInputStream());
+
+        //ResponseEntity<Byte[]> responseEntity = new ResponseEntity<Byte[]>(fileDate, HttpStatus.CREATED);
+
+        //response.setContentType();
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+        response.flushBuffer();
     }
 
 
