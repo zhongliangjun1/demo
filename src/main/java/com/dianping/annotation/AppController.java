@@ -101,7 +101,6 @@ public class AppController {
 
         InputStream inputStream = servletContext.getResourceAsStream("/images/thumb3.jpg");
 
-//        InputStream inputStream = new FileInputStream("/Users/mac/Documents/mywork/spring-demo/src/main/webapp/images/thumb3.jpg");
 //        final HttpHeaders headers = new HttpHeaders();
 //        headers.setContentType(MediaType.IMAGE_JPEG);
 //        List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
@@ -109,15 +108,8 @@ public class AppController {
 //        acceptableMediaTypes.add(MediaType.IMAGE_JPEG);
 //        headers.setAccept(acceptableMediaTypes);
 //        return new ResponseEntity<byte[]>(IOUtils.toByteArray(inputStream), headers, HttpStatus.CREATED);
-
         //return ImageIO.read(inputStream);
 
-        //Resource resource = new ClassPathResource("/images/thumb3.jpg");
-        //byte[] fileDate = FileCopyUtils.copyToByteArray(resource.getInputStream());
-
-        //ResponseEntity<Byte[]> responseEntity = new ResponseEntity<Byte[]>(fileDate, HttpStatus.CREATED);
-
-        //response.setContentType();
         FileCopyUtils.copy(inputStream, response.getOutputStream());
         response.flushBuffer();
     }
