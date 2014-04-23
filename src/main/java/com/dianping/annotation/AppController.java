@@ -3,8 +3,10 @@ package com.dianping.annotation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -53,6 +55,22 @@ public class AppController {
         shop.setAddTime(new Date());
 
         return shop;
+    }
+
+    // Upload single file using Spring Controller
+    @RequestMapping(value = "/addShopWithPic", method = RequestMethod.POST)
+    public String addShopWithPic(@RequestParam(value = "shopname") String shopname,
+                                  @RequestParam(value = "name1") String name1, @RequestParam(value = "file1") MultipartFile file1) throws IOException {
+
+        return "index";
+    }
+
+    // Upload multiple file using Spring Controller
+    @RequestMapping(value = "/addShopWithPics", method = RequestMethod.POST)
+    public String addShopWithPics(@RequestParam(value = "shopname") String shopname,
+                                  @RequestParam(value = "name") String[] names, @RequestParam(value = "file") MultipartFile[] files) throws IOException {
+
+        return "index";
     }
 
 
