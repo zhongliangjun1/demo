@@ -66,6 +66,14 @@ public class AppController {
         return modelAndView;
     }
 
+    @ModelAttribute("user")
+    private User initUser(){
+        User user = new User();
+        user.setUserId(11);
+        //return null; // 告警，会导致http消息中的数据也无法填充user
+        return user;
+    }
+
     @RequestMapping(value = "/ajax/shop/{shopId}", method = RequestMethod.GET)
     public @ResponseBody Shop loadShop(@PathVariable("shopId") int shopId){
 

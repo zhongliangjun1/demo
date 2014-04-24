@@ -9,6 +9,8 @@ package com.dianping.annotation;
  */
 public class User {
 
+    private int userId;
+
     private String name;
     private int age;
     private String password;
@@ -35,5 +37,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
