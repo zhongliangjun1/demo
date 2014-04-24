@@ -110,6 +110,7 @@ public class AppController {
 //        return new ResponseEntity<byte[]>(IOUtils.toByteArray(inputStream), headers, HttpStatus.CREATED);
         //return ImageIO.read(inputStream);
 
+        //response.setContentType("image/jpeg;charset=utf-8"); // image/png
         FileCopyUtils.copy(inputStream, response.getOutputStream());
         response.flushBuffer();
         inputStream.close();

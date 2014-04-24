@@ -32,6 +32,9 @@
             <input type="submit" name="提交" /><br>
         </form>
     </div>
+
+    <div>image test</div>
+    <div><img src="/spring-mvc-demo/getpic" /></div>
 </body>
 <script src="/js/hello.js"></script>
 </html>
