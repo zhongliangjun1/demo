@@ -112,6 +112,7 @@ public class AppController {
 
         FileCopyUtils.copy(inputStream, response.getOutputStream());
         response.flushBuffer();
+        inputStream.close();
     }
 
 
