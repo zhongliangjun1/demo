@@ -20,16 +20,7 @@ public class MainTest {
         ClassPathResource loader = new ClassPathResource("/groovy/"+groovyName+".groovy", MainTest.class.getClassLoader());
         InputStream inputStream = loader.getInputStream();
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        int BUFFER_SIZE = 1024;
-        byte[] data = new byte[BUFFER_SIZE];
-        int count = -1;
-        while((count = inputStream.read(data,0,BUFFER_SIZE)) != -1)
-            outputStream.write(data, 0, count);
-
-        String scriptText = new String(outputStream.toByteArray(),"UTF-8");
-        inputStream.close();
-        outputStream.close();
+        String scriptText = inputStreamToString(inputStream);
         return scriptText;
     }
 
@@ -47,10 +38,34 @@ public class MainTest {
         }
     }
 
+    public static void loadFromJar() throws IOException {
+        ClassPathResource loader = new ClassPathResource("org/springframework/core/io/ClassPathResource.class", MainTest.class.getClassLoader());
+        InputStream inputStream = loader.getInputStream();
+
+        String s = inputStreamToString(inputStream);
+
+        System.out.println("loadFromJar");
+    }
+
+    private static String inputStreamToString(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        int BUFFER_SIZE = 1024;
+        byte[] data = new byte[BUFFER_SIZE];
+        int count = -1;
+        while((count = inputStream.read(data,0,BUFFER_SIZE)) != -1)
+            outputStream.write(data, 0, count);
+
+        String str = new String(outputStream.toByteArray(),"UTF-8");
+        inputStream.close();
+        outputStream.close();
+        return str;
+    }
+
     public static void main(String[] args) throws Exception{
         String scriptText = getScriptText("BasicInfo");
         //System.out.println(scriptText);
         phraseScriptText(scriptText);
+        //loadFromJar();
     }
 
 
