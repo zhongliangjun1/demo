@@ -61,11 +61,21 @@ public class MainTest {
         return str;
     }
 
+    private static void stringToHashCode (String s){
+        int hashCode = s.hashCode();
+        System.out.println(hashCode);
+    }
+
     public static void main(String[] args) throws Exception{
+        //String scriptText = "\n"+getScriptText("BasicInfo");
         String scriptText = getScriptText("BasicInfo");
         //System.out.println(scriptText);
         phraseScriptText(scriptText);
         //loadFromJar();
+        stringToHashCode(scriptText);
+        stringToHashCode(scriptText);
+
+        System.out.println(MainTest.class.getInterfaces().length);
     }
 
 
