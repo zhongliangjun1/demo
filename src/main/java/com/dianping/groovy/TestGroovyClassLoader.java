@@ -3,6 +3,8 @@ package com.dianping.groovy;
 import groovy.lang.GroovyClassLoader;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created with IntelliJ IDEA.
@@ -52,6 +54,22 @@ public class TestGroovyClassLoader {
 
     }
 
+    public static void executeBlockCode() throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+        GroovyClassLoader loader = new GroovyClassLoader();
+        String scriptText = "String name = \"dajun\";\n" +
+                "doSomething(name);\n" +
+                "return ['name':name];"+
+                "\n" +
+                "public void doSomething(String name){\n" +
+                "    println(\"begin doSomething\");\n" +
+                "}";
+        Class clazz = loader.parseClass(scriptText);
+        Method method = clazz.getMethod("run");
+        Object instance = clazz.newInstance();
+        Object result = method.invoke(instance);
+        System.out.println(result.toString());
+    }
+
 
     public static void main(String[] args) throws Exception{
         try {
@@ -61,7 +79,8 @@ public class TestGroovyClassLoader {
         }
 
         //loadClassDuplicate();
-        executeClass();
+        //executeClass();
+        executeBlockCode();
     }
 
 
