@@ -88,7 +88,7 @@ public class AppController {
     // Upload single file using Spring Controller
     @RequestMapping(value = "/addShopWithPic", method = RequestMethod.POST)
     public String addShopWithPic(@RequestParam(value = "shopname") String shopname,
-                                  @RequestParam(value = "name1") String name1, @RequestParam(value = "file1") MultipartFile file1) throws IOException {
+                                  @RequestParam(value = "name") String name, @RequestParam(value = "file") MultipartFile file) throws IOException {
 
         return "index";
     }
