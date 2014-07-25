@@ -15,10 +15,12 @@ public class ClassIsLoadedTest {
 
     public static void main(String[] args) {
 
-        Extend.executeBase();
+
         Class clazzBase = findLoadedClass("com.dianping.classloader.Base");
         Class clazzExtend = findLoadedClass("com.dianping.classloader.Extend");
+        //Extend.executeBase();
         Extend.executeExtend();
+        clazzBase = findLoadedClass("com.dianping.classloader.Base");
         clazzExtend = findLoadedClass("com.dianping.classloader.Extend");
 
 
