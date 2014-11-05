@@ -29,6 +29,27 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
             propertyValue.setConvertedValue("guess ni mei");
             System.out.println("modify myBean sex");
         }
+
+        String[] beanDefinitionNames = configurableListableBeanFactory.getBeanDefinitionNames();
+        if (beanDefinitionNames!=null && beanDefinitionNames.length>0) {
+            for (String beanDefinitionName : beanDefinitionNames) {
+                BeanDefinition beanDefinition = configurableListableBeanFactory.getBeanDefinition(beanDefinitionName);
+                if ( beanDefinition.isSingleton() ) {
+                    if ( beanDefinitionName.equals("singletonBeanUpdateTest") ) {
+                        String beanClassName = beanDefinition.getBeanClassName();
+                        try {
+                            Class c = Class.forName(beanClassName);
+                            if ( SingletonBeanUpdateTest.class.isAssignableFrom(c) ) {
+                                beanDefinition.setScope("prototype");
+                            }
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            }
+        }
+
         System.out.println("postProcessBeanFactory---------end");
     }
 

@@ -27,8 +27,9 @@
 
     <bean id="myBankSavings" class="com.dianping.start.ChildBeanFactory" factory-method="getBankSavings" lazy-init="true" />
 
-    <bean id="myBeanFactoryPostProcessor" class="com.dianping.start.MyBeanFactoryPostProcessor" />
+    <bean id="singletonBeanUpdateTest" class="com.dianping.start.SingletonBeanUpdateTestImpl" scope="singleton" />
 
+    <bean id="myBeanFactoryPostProcessor" class="com.dianping.start.MyBeanFactoryPostProcessor" />
 
 
 
@@ -80,6 +81,7 @@
     <bean id="userService" class="com.dianping.aop.UserServiceImpl" />
     <bean id="actionOfSpringBean" class="com.dianping.struts.ActionOfSpringBean" >
         <property name="userService" ref="userService"/>
+        <!--<property name="singletonBeanUpdateTest" ref="singletonBeanUpdateTest"/>-->
     </bean>
 
 
