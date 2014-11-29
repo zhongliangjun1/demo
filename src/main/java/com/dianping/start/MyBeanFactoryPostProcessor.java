@@ -6,6 +6,7 @@ import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.TypedStringValue;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +27,8 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
             System.out.println("myBeanDefinition.isSingleton() : "+myBeanDefinition.isSingleton());
             MutablePropertyValues propertyValues = myBeanDefinition.getPropertyValues();
             PropertyValue propertyValue = propertyValues.getPropertyValue("sex");
+            TypedStringValue value = (TypedStringValue) propertyValue.getValue();
+            String strValue = value.getValue();
             propertyValue.setConvertedValue("guess ni mei");
             System.out.println("modify myBean sex");
         }
