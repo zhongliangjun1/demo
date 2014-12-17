@@ -12,10 +12,11 @@ import java.io.*;
 public class ReaderTest {
 
     public static void main(String[] args) throws IOException {
-        treatFile1();
-        for ( int i = 2; i<=7; i++ ) {
-            treatOtherFile(i+"");
-        }
+//        treatFile1();
+//        for ( int i = 2; i<=7; i++ ) {
+//            treatOtherFile(i+"");
+//        }
+        readFile();
     }
 
     private static void treatFile1() throws IOException {
@@ -49,6 +50,16 @@ public class ReaderTest {
         writer.close();
         br.close();
         System.out.println("file "+name+" done");
+    }
+
+    private static void readFile() throws IOException  {
+        InputStream inputStream = new FileInputStream("/Users/mac/Documents/mywork/users/users");
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+        while ( br.ready() ) {
+            String openid = br.readLine();
+            System.out.printf(openid);
+        }
+        br.close();
     }
 
 }
