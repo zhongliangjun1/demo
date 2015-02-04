@@ -89,9 +89,7 @@ public class ServerSocketChannelTest {
                         }
                         buffer.clear();
 
-                        socketChannel.finishConnect();
                         socketChannel.close();
-
 
                     } else if (key.isWritable()) {
                         // a channel is ready for writing
