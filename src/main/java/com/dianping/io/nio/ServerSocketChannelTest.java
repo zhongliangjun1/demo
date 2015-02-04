@@ -3,10 +3,15 @@ package com.dianping.io.nio;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -59,16 +64,35 @@ public class ServerSocketChannelTest {
                     if( key.isAcceptable() ) {
 
                         // a connection was accepted by a ServerSocketChannel.
-                        ServerSocketChannel channel = (ServerSocketChannel) key.channel();
-                        Socket socket = channel.accept().socket();
-                        SocketChannel socketChannel = socket.getChannel();
+                        ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
+                        SocketChannel socketChannel = serverChannel.accept();
                         channels++;
-                        debug(String.format("now channels' count = %d", channels));
+                        debug(String.format("now channels count = %d", channels));
+
+                        socketChannel.configureBlocking(false);
+                        socketChannel.register(selector, SelectionKey.OP_READ);
 
                     } else if (key.isConnectable()) {
                         // a connection was established with a remote server.
                     } else if (key.isReadable()) {
+
                         // a channel is ready for reading
+                        SocketChannel socketChannel = (SocketChannel) key.channel();
+
+                        ByteBuffer buffer = ByteBuffer.allocate(1024);
+                        int count = socketChannel.read(buffer);
+                        if (count > 0) {
+                            buffer.flip();
+                            CharsetDecoder charsetDecoder = Charset.forName("UTF-8").newDecoder();
+                            CharBuffer charBuffer = charsetDecoder.decode(buffer);
+                            debug( "get the msg from client : " + charBuffer.toString() );
+                        }
+                        buffer.clear();
+
+                        socketChannel.finishConnect();
+                        socketChannel.close();
+
+
                     } else if (key.isWritable()) {
                         // a channel is ready for writing
                     }
@@ -123,14 +147,12 @@ public class ServerSocketChannelTest {
 
                 try {
                     SocketChannel socketChannel = SocketChannel.open();
-                    socketChannel.configureBlocking(false);
+                    //socketChannel.configureBlocking(false);
                     socketChannel.connect(new InetSocketAddress("127.0.0.1", 3000));
 
-                    while(! socketChannel.finishConnect() ){
-                        System.out.println("----");
-                    }
+                    CharsetEncoder encoder = Charset.forName("UTF-8").newEncoder();
+                    socketChannel.write(encoder.encode(CharBuffer.wrap("hello")));
 
-                    Thread.sleep(6000);
                     socketChannel.close();
 
                 } catch (Exception e) {
