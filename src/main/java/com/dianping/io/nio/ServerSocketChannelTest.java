@@ -24,7 +24,6 @@ public class ServerSocketChannelTest {
     public void startServer() throws IOException {
 
         Selector selector = Selector.open();
-        int channels = 0;
 
         // 建立channel，并绑到9000端口
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
@@ -37,31 +36,35 @@ public class ServerSocketChannelTest {
         SelectionKey selectionKey = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         printKeyInfo(selectionKey);
 
+        int channels = 0;
+        int selectTimes = 0;
+
         while (true) {
 
-            debug("start selecting-----");
-
             int keysNum = selector.select();
+            selectTimes++;
+            debug(String.format("selector selects %d times, now keysNum is %d", selectTimes, keysNum));
+
             if ( keysNum>0 ) {
 
                 Set<SelectionKey> selectionKeySet = selector.selectedKeys();
                 Iterator<SelectionKey> iterator = selectionKeySet.iterator();
+
                 while ( iterator.hasNext() ) {
+
                     SelectionKey key = iterator.next();
-                    printKeyInfo(key);
                     iterator.remove();
-                    if ( key.isAcceptable() ) {
+                    //printKeyInfo(key);
 
-                    } else {
-                        debug("not acceptable");
-                    }
+                    if( key.isAcceptable() ) {
 
-                    if(key.isAcceptable()) {
                         // a connection was accepted by a ServerSocketChannel.
                         ServerSocketChannel channel = (ServerSocketChannel) key.channel();
                         Socket socket = channel.accept().socket();
                         SocketChannel socketChannel = socket.getChannel();
-                        debug((++channels)+"");
+                        channels++;
+                        debug(String.format("now channels' count = %d", channels));
+
                     } else if (key.isConnectable()) {
                         // a connection was established with a remote server.
                     } else if (key.isReadable()) {
@@ -136,10 +139,14 @@ public class ServerSocketChannelTest {
             }
         };
 
-        ExecutorService pool = Executors.newFixedThreadPool(2);
+        ExecutorService pool = Executors.newFixedThreadPool(10);
 
         pool.execute(serverTask);
         Thread.sleep(2000);
+
+        pool.execute(clientTask);
+        Thread.sleep(500);
+        pool.execute(clientTask);
         pool.execute(clientTask);
         Thread.sleep(20000);
         pool.execute(clientTask);
