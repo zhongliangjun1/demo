@@ -25,6 +25,16 @@
         <property name="sex" value="#guess#"/>
     </bean>
 
+    <bean id="listBean" class="com.dianping.start.ListBean" >
+        <property name="names">
+            <list value-type="java.lang.String">
+                <value>a</value>
+                <value>b</value>
+                <value>c</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="myBankSavings" class="com.dianping.start.ChildBeanFactory" factory-method="getBankSavings" lazy-init="true" />
 
     <bean id="singletonBeanUpdateTest" class="com.dianping.start.SingletonBeanUpdateTestImpl" scope="singleton" />
