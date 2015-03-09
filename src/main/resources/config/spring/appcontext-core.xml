@@ -51,8 +51,10 @@
     <bean id="dependencyA" class="com.dianping.dependency.DependencyA" init-method="initialize">
         <property name="dependencyB" ref="dependencyB"/>
     </bean>
+    <!--<bean id="dependencyB" class="com.dianping.dependency.DependencyB" depends-on="dependencyC" init-method="initialize">-->
     <bean id="dependencyB" class="com.dianping.dependency.DependencyB" init-method="initialize">
         <property name="dependencyA" ref="dependencyA"/>
+        <property name="dependencyC" ref="dependencyC"/>
     </bean>
 
 

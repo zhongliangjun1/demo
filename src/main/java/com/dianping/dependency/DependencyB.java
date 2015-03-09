@@ -10,6 +10,7 @@ package com.dianping.dependency;
 public class DependencyB {
 
     private DependencyA dependencyA;
+    private DependencyC dependencyC;
 
     public DependencyB() {
         System.out.println("DependencyB()");
@@ -21,5 +22,9 @@ public class DependencyB {
 
     public void setDependencyA(DependencyA dependencyA) {
         this.dependencyA = dependencyA;
+    }
+
+    public void setDependencyC(DependencyC dependencyC) {
+        this.dependencyC = dependencyC;
     }
 }
