@@ -2,6 +2,7 @@ package com.dianping.concurrent.map;
 
 import com.google.common.collect.Maps;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,6 +20,12 @@ public class ConcurrentMapTest {
 
         data.put("null", null);
 
+    }
+
+    public static void hashMapTest() {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.keySet();
+        map.entrySet();
     }
 
     public static void main(String[] args) {
